@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                                     format: { with: /\A[A-Za-z0-9\.+\-\_]+@[A-Za-z\.]+[^\.\_]\z/ },
                                     uniqueness: { case_sensitive: false }
-
+  validates :password, length: { minimum: 6 }
+  has_secure_password
 
   def posts
     microposts.limit(1)
