@@ -18,5 +18,6 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_template 'users/new'
     assert_select "title", full_title("Sign Up")
     assert_equal '/signup', path
+    puts body
   end
 end
