@@ -6,7 +6,7 @@ require "minitest/rails"
 
 Minitest::Reporters.use!
 
-include Rails.application.routes.url_helpers
+#include Rails.application.routes.url_helpers
 #include ActiveSupport::Testing::Assertions
 #include ActionController::TestCase::Behavior
 
