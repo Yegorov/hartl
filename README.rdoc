@@ -26,3 +26,20 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+== Run app
+
+```
+rvm use 2.3.1
+bin/rails s
+```
+
+== Run test
+
+```
+bundle exec rake test # Run all tests
+bundle exec rake test:integration # Run only integration tests
+bundle exec rake test TEST=test/integration/users_edit_test.rb # Run specific test
+
+bin/rails test test/integration/users_edit_test.rb # Run specific test in Rails 5
+```
