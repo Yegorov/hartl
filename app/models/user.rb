@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                                     format: { with: /\A[A-Za-z0-9\.+\-\_]+@([A-Za-z]+\.?)+[^\.\_]\z/ },
                                     uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, allow_blank: true
   has_secure_password
 
   def posts
