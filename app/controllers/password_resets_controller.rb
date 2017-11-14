@@ -1,7 +1,7 @@
 class PasswordResetsController < ApplicationController
-  before_adction :get_user, only: [:edit, :update]
-  before_adction :valid_user, only: [:edit, :update]
-  before_adction :check_expiration, only: [:edit, :update]
+  before_action :get_user, only: [:edit, :update]
+  before_action :valid_user, only: [:edit, :update]
+  before_action :check_expiration, only: [:edit, :update]
 
   def new
   end
@@ -37,7 +37,7 @@ class PasswordResetsController < ApplicationController
   end
 
   private
-  def users_params
+  def user_params
     params.require(:user).permit(:password, :password_confirmation)
   end
   def password_blank?
@@ -48,7 +48,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def valid_user
-    unless (@user && user.activated? &&
+    unless (@user && @user.activated? &&
             @user.authenticated?(:reset, params[:id]))
       redirect_to root_url
     end
