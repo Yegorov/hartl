@@ -8,7 +8,8 @@ class AccountActivationsController < ApplicationController
       log_in user
       flash[:success] = "Account activated!"
       redirect_to user
+    else
+      redirect_to root_url
     end
-
   end
 end
