@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
     respond_to do |format|
       format.json { render json: { users: @users } }
       format.html
@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     #debugger # binding.pry
+    redirect_to root_url and return unless @user.activated
   end
 
   # GET /users/new
