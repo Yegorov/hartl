@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MicropostsControllerTest < ActionController::TestCase
   setup do
-    @micropost = microposts(:one)
+    @micropost = microposts(:orange)
   end
 
   test "should get index" do
@@ -16,13 +16,13 @@ class MicropostsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create micropost" do
-    assert_difference('Micropost.count') do
-      post :create, micropost: { content: @micropost.content, user_id: @micropost.user_id }
-    end
+  # test "should create micropost" do
+  #   assert_difference('Micropost.count') do
+  #     post :create, micropost: { content: @micropost.content, user_id: @micropost.user_id }
+  #   end
 
-    assert_redirected_to micropost_path(assigns(:micropost))
-  end
+  #   assert_redirected_to micropost_path(assigns(:micropost))
+  # end
 
   test "should show micropost" do
     get :show, id: @micropost
@@ -39,11 +39,25 @@ class MicropostsControllerTest < ActionController::TestCase
     assert_redirected_to micropost_path(assigns(:micropost))
   end
 
-  test "should destroy micropost" do
-    assert_difference('Micropost.count', -1) do
+  # test "should destroy micropost" do
+  #   assert_difference('Micropost.count', -1) do
+  #     delete :destroy, id: @micropost
+  #   end
+
+  #   assert_redirected_to microposts_path
+  # end
+
+  test "should redirect create when not logged in" do
+    assert_no_difference 'Micropost.count' do
+      post :create, micropost: { content: "Lorem ipsum" }
+    end
+    assert_redirected_to login_url
+  end
+
+  test "should redirect destroy when not logged in" do
+    assert_no_difference 'Micropost.count' do
       delete :destroy, id: @micropost
     end
-
-    assert_redirected_to microposts_path
+    assert_redirected_to login_url
   end
 end

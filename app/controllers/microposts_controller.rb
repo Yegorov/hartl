@@ -1,4 +1,5 @@
 class MicropostsController < ApplicationController
+  before_action :logged_in_user, only: [:create, :destroy]
   before_action :set_micropost, only: [:show, :edit, :update, :destroy]
 
   # GET /microposts
