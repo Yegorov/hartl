@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     microposts.limit(1)
   end
 
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+
   def as_json(options={})
     options[:except] ||= [:id]
     options[:methods] ||= [:posts]
