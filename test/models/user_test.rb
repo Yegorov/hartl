@@ -91,5 +91,21 @@ class UserTest < ActiveSupport::TestCase
     artem.unfollow(archer)
     assert_not artem.following?(archer)
   end
-  
+  test "feed should have the right posts" do
+    artem = users(:artem)
+    archer = users(:archer)
+    lana = users(:lana)
+    # Сообщения читаемого пользователя
+    lana.microposts.each do |post_following|
+      assert artem.feed.include?(post_following)
+    end
+    # Собственные сообщения
+    artem.microposts.each do |post_self|
+      assert artem.feed.include?(post_self)
+    end
+    # Сообщения нечитаемого пользователя
+    archer.microposts.each do |post_unfollowed|
+      assert_not artem.feed.include?(post_unfollowed)
+    end
+  end
 end
