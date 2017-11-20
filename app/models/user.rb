@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
                                   foreign_key: 'follower_id',
                                   dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
                                     format: { with: /\A[A-Za-z0-9\.+\-\_]+@([A-Za-z]+\.?)+[^\.\_]\z/ },
